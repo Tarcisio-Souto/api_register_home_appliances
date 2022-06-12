@@ -4,7 +4,7 @@
 
     <div class="row btn-actions">
       <div class="col-md-12">
-        <Link :href="'/eletrodomesticos/novo'" class="btn btn-primary btnNovo"
+        <Link :href="'/api/eletrodomesticos/novo'" class="btn btn-primary btnNovo"
           >Novo</Link
         >
       </div>
@@ -18,44 +18,35 @@
       >
         <thead>
           <tr>
-            <th>Veículo</th>
-            <th>Placa</th>
-            <th>Empresa</th>
-            <th>Tipo de Infração</th>
-            <th>Data da Multa</th>
-            <th>Valor</th>
+            <th>Produto</th>
+            <th>Marca</th>
+            <th>Tensão</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="multa in multas" :key="multa.mul_id" :value="multa.mul_id">
-            <td>{{ multa.nome_modelo }}</td>
-            <td>{{ multa.placa }}</td>
-            <td>{{ multa.nome }}</td>
-            <td>{{ multa.descricao_infracao }}</td>
-            <td>{{ multa.data_multa }}</td>
-            <td>{{ "R$ " + multa.custo_total }}</td>
+          <tr v-for="eletro in eletros" :key="eletro.eletro_id" :value="eletro.eletro_id">
+            <td>{{ eletro.nome_eletro }}</td>
+            <td>{{ eletro.marca }}</td>
+            <td>{{ eletro.tensao }}</td>
             <td align="center">
-              <Link :href="'/multa/visualizar/' + multa.mul_id"
+              <Link :href="'/api/eletrodomesticos/visualizar/' + eletro.id_eletro"
                 ><i class="fas fa-eye"></i
               ></Link>
-              <Link :href="'/multa/editar/' + multa.mul_id"
+              <Link :href="'/api/eletrodomesticos/editar/' + eletro.id_eletro"
                 ><i class="fas fa-edit"></i
               ></Link>
               <span
-                ><i class="fas fa-trash-alt" @click="sendForm(multa.mul_id)"></i
+                ><i class="fas fa-trash-alt" @click="sendForm(eletro.id_eletro)"></i
               ></span>
             </td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-            <th>Veículo</th>
-            <th>Placa</th>
-            <th>Empresa</th>
-            <th>Tipo de Infração</th>
-            <th>Data da Multa</th>
-            <th>Valor</th>
+            <th>Produto</th>
+            <th>Marca</th>
+            <th>Tensão</th>
             <th>Ações</th>
           </tr>
         </tfoot>
@@ -76,13 +67,13 @@ export default {
     Layout
   },
   props: {
-    multas: Array,
+    eletros: Array,
   },
 
   data: () => {
     return {
       form: {
-        id: null,
+        id: null
       },
     };
   },
@@ -112,7 +103,7 @@ export default {
         },
         callback: function (result) {
           if (result == true) {
-            v.$inertia.post("/multa/deletar/" + id, {
+            v.$inertia.post("/api/eletrodomesticos/deletar/" + id, {
               forceFormData: true,
               preserveScroll: false,
               _token: v.$page.props.csrf_token,

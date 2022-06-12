@@ -4567,6 +4567,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4575,26 +4584,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     errors: Object,
-    infracoes: Array,
-    veiculos: Array
+    marcas: Array
   },
   data: function data() {
     return {
       form: {
-        veiculo: null,
-        infracao: null,
-        data_multa: null,
-        custo: null
+        nome: null,
+        fk_marca: null,
+        descricao: null,
+        tensao: null
       }
     };
   },
   methods: {
     sendForm: function sendForm() {
-      var aux_veiculo = this.form.veiculo;
-      var aux_infracao = this.form.infracao;
-      var aux_data_multa = this.form.data_multa;
-      var aux_custo = this.form.custo;
-      this.$inertia.post("/multas/registrar", this.form, {
+      this.$inertia.post("eletrodomesticos/registrar", this.form, {
         forceFormData: true,
         preserveScroll: false,
         _token: this.$page.props.csrf_token,
@@ -4609,12 +4613,6 @@ __webpack_require__.r(__webpack_exports__);
             message: "<i class='fas fa-check-circle' style='color:green'></i>&nbsp&nbsp" + "<span style='font-weight:bold; position: relative; top: 5px;'>Multa registrada com sucesso!</span>"
           });
           $("#formAddMulta").reset();
-        },
-        onError: function onError() {
-          $("#inputVeiculo").val(aux_veiculo);
-          $("#inputInfracao").val(aux_infracao);
-          $("#inputCusto").val(aux_custo);
-          $("#inputDataMulta").val(aux_data_multa);
         }
       });
     }
@@ -4694,15 +4692,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4711,7 +4700,7 @@ __webpack_require__.r(__webpack_exports__);
     Layout: _Layout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
-    multas: Array
+    eletros: Array
   },
   data: function data() {
     return {
@@ -4741,7 +4730,7 @@ __webpack_require__.r(__webpack_exports__);
         },
         callback: function callback(result) {
           if (result == true) {
-            v.$inertia.post("/multa/deletar/" + id, {
+            v.$inertia.post("/api/eletrodomesticos/deletar/" + id, {
               forceFormData: true,
               preserveScroll: false,
               _token: v.$page.props.csrf_token
@@ -29445,8 +29434,45 @@ var render = function () {
             _c("br"),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("label", { attrs: { for: "inputNome" } }, [_vm._v("Nome")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("div", { staticClass: "input-group-prepend" }, [
+                    _c("div", { staticClass: "input-group-text" }, [
+                      _c("i", { staticClass: "fas fa-calendar-alt" }),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.nome,
+                        expression: "form.nome",
+                      },
+                    ],
+                    key: "",
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "inputNome", name: "txtNome" },
+                    domProps: { value: _vm.form.nome },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "nome", $event.target.value)
+                      },
+                    },
+                  }),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-md-6" }, [
-                _c("label", { attrs: { for: "inputVeiculo" } }, [
+                _c("label", { attrs: { for: "inputMarca" } }, [
                   _vm._v("Marca"),
                 ]),
                 _vm._v(" "),
@@ -29464,12 +29490,12 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.veiculo,
-                          expression: "form.veiculo",
+                          value: _vm.form.marca,
+                          expression: "form.marca",
                         },
                       ],
                       staticClass: "form-control",
-                      attrs: { id: "inputVeiculo", name: "txtVeiculo" },
+                      attrs: { id: "inputMarca", name: "txtMarca" },
                       on: {
                         change: function ($event) {
                           var $$selectedVal = Array.prototype.filter
@@ -29482,7 +29508,7 @@ var render = function () {
                             })
                           _vm.$set(
                             _vm.form,
-                            "veiculo",
+                            "marca",
                             $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
@@ -29492,89 +29518,20 @@ var render = function () {
                     },
                     [
                       _c("option", { attrs: { selected: "" } }, [
-                        _vm._v("Selecione o veículo"),
+                        _vm._v("Selecione a marca"),
                       ]),
                       _vm._v(" "),
-                      _vm._l(_vm.veiculos, function (veiculo) {
-                        return _c(
-                          "option",
-                          { key: veiculo.id, domProps: { value: veiculo.id } },
-                          [
-                            _vm._v(
-                              "\n                  " +
-                                _vm._s(
-                                  veiculo.nome_modelo + " / " + veiculo.placa
-                                ) +
-                                "\n                "
-                            ),
-                          ]
-                        )
-                      }),
-                    ],
-                    2
-                  ),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-6" }, [
-                _c("label", { attrs: { for: "inputInfracao" } }, [
-                  _vm._v("Tipos de Infrações"),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group" }, [
-                  _c("div", { staticClass: "input-group-prepend" }, [
-                    _c("div", { staticClass: "input-group-text" }, [
-                      _c("i", { staticClass: "fas fa-briefcase" }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.infracao,
-                          expression: "form.infracao",
-                        },
-                      ],
-                      staticClass: "form-control",
-                      attrs: { id: "inputInfracao", name: "txtInfracao" },
-                      on: {
-                        change: function ($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function (o) {
-                              return o.selected
-                            })
-                            .map(function (o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.form,
-                            "infracao",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        },
-                      },
-                    },
-                    [
-                      _c("option", [_vm._v("Selecione a Infração")]),
-                      _vm._v(" "),
-                      _vm._l(_vm.infracoes, function (infracao) {
+                      _vm._l(_vm.marcas, function (marca) {
                         return _c(
                           "option",
                           {
-                            key: infracao.id,
-                            domProps: { value: infracao.id },
+                            key: marca.id_marca,
+                            domProps: { value: marca.id_marca },
                           },
                           [
                             _vm._v(
                               "\n                  " +
-                                _vm._s(infracao.descricao_infracao) +
+                                _vm._s(marca.nome) +
                                 "\n                "
                             ),
                           ]
@@ -29585,106 +29542,141 @@ var render = function () {
                   ),
                 ]),
               ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("label", { attrs: { for: "inputDescricao" } }, [
+                    _vm._v("Descrição"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("div", { staticClass: "input-group-prepend" }, [
+                      _c("div", { staticClass: "input-group-text" }, [
+                        _c("i", { staticClass: "fas fa-calendar-alt" }),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "inputDescricao" } }, [
+                        _vm._v("Descrição"),
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.descricao,
+                            expression: "form.descricao",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "inputDescricao", rows: "3" },
+                        domProps: { value: _vm.form.descricao },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "descricao", $event.target.value)
+                          },
+                        },
+                      }),
+                    ]),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("label", { attrs: { for: "inputTensao" } }, [
+                  _vm._v("Tensão"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.tensao,
+                            expression: "form.tensao",
+                          },
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "exampleRadios",
+                          id: "inputTensao1",
+                          value: "m",
+                        },
+                        domProps: { checked: _vm._q(_vm.form.tensao, "m") },
+                        on: {
+                          change: function ($event) {
+                            return _vm.$set(_vm.form, "tensao", "m")
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "exampleRadios1" },
+                        },
+                        [
+                          _vm._v(
+                            "\n                    110v\n                  "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.tensao,
+                            expression: "form.tensao",
+                          },
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "exampleRadios",
+                          id: "inputTensao2",
+                          value: "110v",
+                        },
+                        domProps: { checked: _vm._q(_vm.form.tensao, "110v") },
+                        on: {
+                          change: function ($event) {
+                            return _vm.$set(_vm.form, "tensao", "110v")
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "exampleRadios2" },
+                        },
+                        [
+                          _vm._v(
+                            "\n                    220v\n                  "
+                          ),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                ]),
+              ]),
             ]),
             _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("label", { attrs: { for: "inputDataMulta" } }, [
-                  _vm._v("Data da Multa"),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group" }, [
-                  _c("div", { staticClass: "input-group-prepend" }, [
-                    _c("div", { staticClass: "input-group-text" }, [
-                      _c("i", { staticClass: "fas fa-calendar-alt" }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.data_multa,
-                        expression: "form.data_multa",
-                      },
-                      {
-                        name: "mask",
-                        rawName: "v-mask",
-                        value: "##/##/####",
-                        expression: "'##/##/####'",
-                      },
-                    ],
-                    key: "",
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "inputDataMulta",
-                      name: "txtDataMulta",
-                    },
-                    domProps: { value: _vm.form.data_multa },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "data_multa", $event.target.value)
-                      },
-                    },
-                  }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("label", { attrs: { for: "inputCusto" } }, [
-                  _vm._v("Custo"),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group" }, [
-                  _c("div", { staticClass: "input-group-prepend" }, [
-                    _c("div", { staticClass: "input-group-text" }, [
-                      _c("i", { staticClass: "fas fa-id-card" }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.custo,
-                        expression: "form.custo",
-                      },
-                      {
-                        name: "mask",
-                        rawName: "v-mask",
-                        value: [
-                          "R$ ##.##",
-                          "R$ ###.###",
-                          "R$ #.###,##",
-                          "R$ ##.###,##",
-                        ],
-                        expression:
-                          "[\n                  'R$ ##.##',\n                  'R$ ###.###',\n                  'R$ #.###,##',\n                  'R$ ##.###,##',\n                ]",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", id: "inputCusto", name: "txtCusto" },
-                    domProps: { value: _vm.form.custo },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "custo", $event.target.value)
-                      },
-                    },
-                  }),
-                ]),
-              ]),
-              _vm._v(" "),
+            _c("div", [
               _c("div", { staticClass: "col-md-4" }, [
                 _c(
                   "button",
@@ -29754,7 +29746,7 @@ var render = function () {
               "Link",
               {
                 staticClass: "btn btn-primary btnNovo",
-                attrs: { href: "/eletrodomesticos/novo" },
+                attrs: { href: "/api/eletrodomesticos/novo" },
               },
               [_vm._v("Novo")]
             ),
@@ -29774,17 +29766,11 @@ var render = function () {
           [
             _c("thead", [
               _c("tr", [
-                _c("th", [_vm._v("Veículo")]),
+                _c("th", [_vm._v("Produto")]),
                 _vm._v(" "),
-                _c("th", [_vm._v("Placa")]),
+                _c("th", [_vm._v("Marca")]),
                 _vm._v(" "),
-                _c("th", [_vm._v("Empresa")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Tipo de Infração")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Data da Multa")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Valor")]),
+                _c("th", [_vm._v("Tensão")]),
                 _vm._v(" "),
                 _c("th", [_vm._v("Ações")]),
               ]),
@@ -29792,22 +29778,16 @@ var render = function () {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.multas, function (multa) {
+              _vm._l(_vm.eletros, function (eletro) {
                 return _c(
                   "tr",
-                  { key: multa.mul_id, attrs: { value: multa.mul_id } },
+                  { key: eletro.eletro_id, attrs: { value: eletro.eletro_id } },
                   [
-                    _c("td", [_vm._v(_vm._s(multa.nome_modelo))]),
+                    _c("td", [_vm._v(_vm._s(eletro.nome_eletro))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(multa.placa))]),
+                    _c("td", [_vm._v(_vm._s(eletro.marca))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(multa.nome))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(multa.descricao_infracao))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(multa.data_multa))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s("R$ " + multa.custo_total))]),
+                    _c("td", [_vm._v(_vm._s(eletro.tensao))]),
                     _vm._v(" "),
                     _c(
                       "td",
@@ -29817,7 +29797,9 @@ var render = function () {
                           "Link",
                           {
                             attrs: {
-                              href: "/multa/visualizar/" + multa.mul_id,
+                              href:
+                                "/api/eletrodomesticos/visualizar/" +
+                                eletro.id_eletro,
                             },
                           },
                           [_c("i", { staticClass: "fas fa-eye" })]
@@ -29825,7 +29807,13 @@ var render = function () {
                         _vm._v(" "),
                         _c(
                           "Link",
-                          { attrs: { href: "/multa/editar/" + multa.mul_id } },
+                          {
+                            attrs: {
+                              href:
+                                "/api/eletrodomesticos/editar/" +
+                                eletro.id_eletro,
+                            },
+                          },
                           [_c("i", { staticClass: "fas fa-edit" })]
                         ),
                         _vm._v(" "),
@@ -29834,7 +29822,7 @@ var render = function () {
                             staticClass: "fas fa-trash-alt",
                             on: {
                               click: function ($event) {
-                                return _vm.sendForm(multa.mul_id)
+                                return _vm.sendForm(eletro.id_eletro)
                               },
                             },
                           }),
@@ -29850,17 +29838,11 @@ var render = function () {
             _vm._v(" "),
             _c("tfoot", [
               _c("tr", [
-                _c("th", [_vm._v("Veículo")]),
+                _c("th", [_vm._v("Produto")]),
                 _vm._v(" "),
-                _c("th", [_vm._v("Placa")]),
+                _c("th", [_vm._v("Marca")]),
                 _vm._v(" "),
-                _c("th", [_vm._v("Empresa")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Tipo de Infração")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Data da Multa")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Valor")]),
+                _c("th", [_vm._v("Tensão")]),
                 _vm._v(" "),
                 _c("th", [_vm._v("Ações")]),
               ]),

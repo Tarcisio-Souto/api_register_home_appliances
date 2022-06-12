@@ -1,6 +1,5 @@
 <template>
   <layout>
-    
     <!-- Modal -->
 
     <div class="row">
@@ -24,61 +23,8 @@
           <br />
 
           <div class="row">
-            <div class="col-md-6">
-              <label for="inputVeiculo">Marca</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <i class="fas fa-building"></i>
-                  </div>
-                </div>
-                <select
-                  id="inputVeiculo"
-                  class="form-control"
-                  v-model="form.veiculo"
-                  name="txtVeiculo"
-                >
-                  <option selected>Selecione o veículo</option>
-                  <option
-                    v-for="veiculo in veiculos"
-                    :key="veiculo.id"
-                    :value="veiculo.id"
-                  >
-                    {{ veiculo.nome_modelo + " / " + veiculo.placa }}
-                  </option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <label for="inputInfracao">Tipos de Infrações</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <i class="fas fa-briefcase"></i>
-                  </div>
-                </div>
-                <select
-                  id="inputInfracao"
-                  class="form-control"
-                  v-model="form.infracao"
-                  name="txtInfracao"
-                >
-                  <option>Selecione a Infração</option>
-                  <option
-                    v-for="infracao in infracoes"
-                    :key="infracao.id"
-                    :value="infracao.id"
-                  >
-                    {{ infracao.descricao_infracao }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <br />
-          <div class="row">
             <div class="col-md-4">
-              <label for="inputDataMulta">Data da Multa</label>
+              <label for="inputNome">Nome</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
@@ -88,37 +34,100 @@
                 <input
                   key=""
                   type="text"
-                  id="inputDataMulta"
+                  id="inputNome"
                   class="form-control"
-                  v-model="form.data_multa"
-                  name="txtDataMulta"
-                  v-mask="'##/##/####'"
+                  v-model="form.nome"
+                  name="txtNome"
                 />
               </div>
             </div>
-            <div class="col-md-4">
-              <label for="inputCusto">Custo</label>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label for="inputMarca">Marca</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
-                    <i class="fas fa-id-card"></i>
+                    <i class="fas fa-building"></i>
                   </div>
                 </div>
-                <input
-                  type="text"
-                  id="inputCusto"
+                <select
+                  id="inputMarca"
                   class="form-control"
-                  v-model="form.custo"
-                  name="txtCusto"
-                  v-mask="[
-                    'R$ ##.##',
-                    'R$ ###.###',
-                    'R$ #.###,##',
-                    'R$ ##.###,##',
-                  ]"
-                />
+                  v-model="form.marca"
+                  name="txtMarca"
+                >
+                  <option selected>Selecione a marca</option>
+                  <option
+                    v-for="marca in marcas"
+                    :key="marca.id_marca"
+                    :value="marca.id_marca"
+                  >
+                    {{ marca.nome }}
+                  </option>
+                </select>
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label for="inputDescricao">Descrição</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="fas fa-calendar-alt"></i>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputDescricao">Descrição</label>
+                    <textarea
+                      class="form-control"
+                      id="inputDescricao"
+                      rows="3"
+                      v-model="form.descricao"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="inputTensao">Tensão</label>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="exampleRadios"
+                      id="inputTensao1"
+                      value="m"
+                      v-model="form.tensao"
+                    />
+                    <label class="form-check-label" for="exampleRadios1">
+                      110v
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="exampleRadios"
+                      id="inputTensao2"
+                      v-model="form.tensao"
+                      value="110v"
+                    />
+                    <label class="form-check-label" for="exampleRadios2">
+                      220v
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div>
             <div class="col-md-4">
               <button type="submit" class="btn btn-success btnCadastrar">
                 Cadastrar
@@ -138,8 +147,7 @@
 </template>
 
 <script>
-
-import Layout from '../Layout.vue'
+import Layout from "../Layout.vue";
 import { Inertia } from "@inertiajs/inertia";
 
 export default {
@@ -148,27 +156,22 @@ export default {
   },
   props: {
     errors: Object,
-    infracoes: Array,
-    veiculos: Array,
+    marcas: Array,
   },
   data: () => {
     return {
       form: {
-        veiculo: null,
-        infracao: null,
-        data_multa: null,
-        custo: null,
+        nome: null,
+        fk_marca: null,
+        descricao: null,
+        tensao: null,
       },
     };
   },
   methods: {
     sendForm() {
-      var aux_veiculo = this.form.veiculo;
-      var aux_infracao = this.form.infracao;
-      var aux_data_multa = this.form.data_multa;
-      var aux_custo = this.form.custo;
 
-      this.$inertia.post("/multas/registrar", this.form, {
+      this.$inertia.post("eletrodomesticos/registrar", this.form, {
         forceFormData: true,
         preserveScroll: false,
         _token: this.$page.props.csrf_token,
@@ -189,12 +192,6 @@ export default {
           $("#formAddMulta").reset();
         },
 
-        onError: () => {
-          $("#inputVeiculo").val(aux_veiculo);
-          $("#inputInfracao").val(aux_infracao);
-          $("#inputCusto").val(aux_custo);
-          $("#inputDataMulta").val(aux_data_multa);
-        },
       });
     },
   },
