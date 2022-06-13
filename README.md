@@ -20,12 +20,12 @@ Este projeto possui um serviço de API de CRUD completo para eletrodomésticos, 
 <p>Endpoints</p><br>
 
 <ul>
-    <li>"/marcas/listar"</li>
-    <li>"/eletrodomesticos/listar"</li>
-    <li>"/eletrodomesticos/visualizar/{id}"</li>
-    <li>"/eletrodomesticos/registrar"</li>
-    <li>"/eletrodomesticos/atualizar"</li>
-    <li>"/eletrodomesticos/deletar/{id}"</li>
+    <li>"/api/marcas/listar"</li>
+    <li>"/api/eletrodomesticos/listar"</li>
+    <li>"/api/eletrodomesticos/visualizar/{id}"</li>
+    <li>"/api/eletrodomesticos/registrar"</li>
+    <li>"/api/eletrodomesticos/atualizar"</li>
+    <li>"/api/eletrodomesticos/deletar/{id}"</li>
 </ul>
 <br>
 
