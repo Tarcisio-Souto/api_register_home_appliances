@@ -5020,9 +5020,6 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Head: _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__.Head,
     Layout: _Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  props: {
-    user: String
   }
 });
 

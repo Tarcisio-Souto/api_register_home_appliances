@@ -17,9 +17,6 @@ export default {
     Head,
     Layout,
   },
-  props: {
-    user: String,
-  },
 
 };
 </script>
