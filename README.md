@@ -4,7 +4,7 @@
 <br>
 
 <p>
-Este projeto possui um serviço de API de CRUD completo para eletrodomésticos, assim como uma aplicação front-end para consumir essa API através do VueJs.
+Esta é a primeira versão do projeto que possui um serviço de API de CRUD completo para eletrodomésticos, assim como uma aplicação front-end para consumir essa API através do VueJs.
 <p><br>
 
 <p>Com este sistema é possível fazer o seguinte:</p><br>
