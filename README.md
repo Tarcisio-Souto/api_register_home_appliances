@@ -79,31 +79,31 @@ Este projeto possui um serviço de API de CRUD completo para eletrodomésticos, 
 
 ><b>Tela Inicial</b><br>
 
-![Screenshot](https://github.com/Tarcisio-Souto/controle_de_frotas/blob/main/capturas/01_-_Inicio.PNG)
+![Screenshot](https://github.com/Tarcisio-Souto/api_register_home_appliances/blob/main/capturas/01_-_Inicio.PNG)
 
 <br><br>
 
 ><b>Lista de Produtos</b><br>
 
-![Screenshot](https://github.com/Tarcisio-Souto/controle_de_frotas/blob/main/capturas/02_-_Listar_Produtos.PNG)
+![Screenshot](https://github.com/Tarcisio-Souto/api_register_home_appliances/blob/main/capturas/02_-_Listar_Produtos.PNG)
 
 <br><br>
 
 ><b>Visualização do Cadastro do Produto</b><br>
 
-![Screenshot](https://github.com/Tarcisio-Souto/controle_de_frotas/blob/main/capturas/03_-_Visualizar_Produto.PNG)
+![Screenshot](https://github.com/Tarcisio-Souto/api_register_home_appliances/blob/main/capturas/03_-_Visualizar_Produto.PNG)
 
 <br><br>
 
 ><b>View de Atualização do Produto</b><br>
 
-![Screenshot](https://github.com/Tarcisio-Souto/controle_de_frotas/blob/main/capturas/04_-_Atualizar_Produto.PNG)
+![Screenshot](https://github.com/Tarcisio-Souto/api_register_home_appliances/blob/main/capturas/04_-_Atualizar_Produto.PNG)
 
 <br><br>
 
 ><b>Deletando Registro</b><br>
 
-![Screenshot](https://github.com/Tarcisio-Souto/controle_de_frotas/blob/main/capturas/05_-_Delecao_Produto.PNG)
+![Screenshot](https://github.com/Tarcisio-Souto/api_register_home_appliances/blob/main/capturas/05_-_Delecao_Produto.PNG)
 
 
 <br><br><br>
