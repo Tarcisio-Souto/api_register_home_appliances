@@ -9,7 +9,7 @@
         </div>
       </div>
 
-      <div class="table-responsive-lg">
+      <div class="table-responsive-lg" id="div_table">
         <table
           id="tbl-list-eletros"
           class="table table-striped table-bordered table-hover"
@@ -36,7 +36,7 @@
                 <Link :href="'/eletrodomesticos/visualizar/' + eletro.id_eletro"
                   ><i class="fas fa-eye"></i
                 ></Link>
-                <Link :href="'/api/eletrodomesticos/editar/' + eletro.id_eletro"
+                <Link :href="'/eletrodomesticos/editar/' + eletro.id_eletro"
                   ><i class="fas fa-edit"></i
                 ></Link>
                 <span
@@ -130,6 +130,9 @@ export default {
                       res.data["success"] +
                       "</span>",
                   });
+
+                  $('#div_table').load(location.href + "#div_table")
+
                 } else {
                   this.form.errors = res.data;
                   console.log(res.data);

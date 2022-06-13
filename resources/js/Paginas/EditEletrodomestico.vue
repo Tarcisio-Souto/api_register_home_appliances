@@ -173,6 +173,7 @@
 import Layout from "../Layout.vue";
 import { Inertia } from "@inertiajs/inertia";
 
+
 export default {
   components: {
     Layout,
@@ -192,6 +193,7 @@ export default {
         descricao: null,
         tensao: null,
         marca: null,
+        route_back: window.location.listEletros
       },
     };
   },
@@ -234,7 +236,10 @@ export default {
                 res.data["success"] +
                 "</span>",
             });
-        
+
+            window.location.href = "/eletrodomesticos/listar"  
+
+
             $("#formCadEletro").each(function () {
               this.reset();
               $("#inputMarca").empty();

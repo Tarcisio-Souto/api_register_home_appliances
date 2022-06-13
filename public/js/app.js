@@ -4794,7 +4794,8 @@ __webpack_require__.r(__webpack_exports__);
         nome_eletro: null,
         descricao: null,
         tensao: null,
-        marca: null
+        marca: null,
+        route_back: window.location.listEletros
       }
     };
   },
@@ -4824,6 +4825,7 @@ __webpack_require__.r(__webpack_exports__);
             title: "<img src='https://i0.wp.com/www.roteirospe.com/wp-content/uploads/2017/02/SEU-LOGO-AQUI-300x81-1-300x81-1.png?ssl=1'>",
             message: "<i class='fas fa-check-circle' style='color:green'></i>&nbsp&nbsp" + "<span style='font-weight:bold; position: relative; top: 5px;'>" + res.data["success"] + "</span>"
           });
+          window.location.href = "/eletrodomesticos/listar";
           $("#formCadEletro").each(function () {
             this.reset();
             $("#inputMarca").empty();
@@ -4970,6 +4972,7 @@ __webpack_require__.r(__webpack_exports__);
                   title: "<img src='https://i0.wp.com/www.roteirospe.com/wp-content/uploads/2017/02/SEU-LOGO-AQUI-300x81-1-300x81-1.png?ssl=1'>",
                   message: "<i class='fas fa-check-circle' style='color:green'></i>&nbsp&nbsp" + "<span style='font-weight:bold; position: relative; top: 5px;'>" + res.data["success"] + "</span>"
                 });
+                $('#div_table').load(location.href + "#div_table");
               } else {
                 this.form.errors = res.data;
                 console.log(res.data);
@@ -30645,101 +30648,108 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "table-responsive-lg" }, [
-        _c(
-          "table",
-          {
-            staticClass: "table table-striped table-bordered table-hover",
-            staticStyle: { width: "100%" },
-            attrs: { id: "tbl-list-eletros" },
-          },
-          [
-            _c("thead", [
-              _c("tr", [
-                _c("th", [_vm._v("Produto")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Marca")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Tensão")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Ações")]),
+      _c(
+        "div",
+        { staticClass: "table-responsive-lg", attrs: { id: "div_table" } },
+        [
+          _c(
+            "table",
+            {
+              staticClass: "table table-striped table-bordered table-hover",
+              staticStyle: { width: "100%" },
+              attrs: { id: "tbl-list-eletros" },
+            },
+            [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", [_vm._v("Produto")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Marca")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Tensão")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Ações")]),
+                ]),
               ]),
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(this.form.eletros, function (eletro) {
-                return _c(
-                  "tr",
-                  { key: eletro.eletro_id, attrs: { value: eletro.eletro_id } },
-                  [
-                    _c("td", [_vm._v(_vm._s(eletro.nome_eletro))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(eletro.marca))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(eletro.tensao))]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { attrs: { align: "center" } },
-                      [
-                        _c(
-                          "Link",
-                          {
-                            attrs: {
-                              href:
-                                "/eletrodomesticos/visualizar/" +
-                                eletro.id_eletro,
-                            },
-                          },
-                          [_c("i", { staticClass: "fas fa-eye" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "Link",
-                          {
-                            attrs: {
-                              href:
-                                "/api/eletrodomesticos/editar/" +
-                                eletro.id_eletro,
-                            },
-                          },
-                          [_c("i", { staticClass: "fas fa-edit" })]
-                        ),
-                        _vm._v(" "),
-                        _c("span", [
-                          _c("i", {
-                            staticClass: "fas fa-trash-alt",
-                            on: {
-                              click: function ($event) {
-                                return _vm.sendForm(eletro.id_eletro)
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(this.form.eletros, function (eletro) {
+                  return _c(
+                    "tr",
+                    {
+                      key: eletro.eletro_id,
+                      attrs: { value: eletro.eletro_id },
+                    },
+                    [
+                      _c("td", [_vm._v(_vm._s(eletro.nome_eletro))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(eletro.marca))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(eletro.tensao))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { attrs: { align: "center" } },
+                        [
+                          _c(
+                            "Link",
+                            {
+                              attrs: {
+                                href:
+                                  "/eletrodomesticos/visualizar/" +
+                                  eletro.id_eletro,
                               },
                             },
-                          }),
-                        ]),
-                      ],
-                      1
-                    ),
-                  ]
-                )
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _c("tfoot", [
-              _c("tr", [
-                _c("th", [_vm._v("Produto")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Marca")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Tensão")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Ações")]),
+                            [_c("i", { staticClass: "fas fa-eye" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "Link",
+                            {
+                              attrs: {
+                                href:
+                                  "/eletrodomesticos/editar/" +
+                                  eletro.id_eletro,
+                              },
+                            },
+                            [_c("i", { staticClass: "fas fa-edit" })]
+                          ),
+                          _vm._v(" "),
+                          _c("span", [
+                            _c("i", {
+                              staticClass: "fas fa-trash-alt",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.sendForm(eletro.id_eletro)
+                                },
+                              },
+                            }),
+                          ]),
+                        ],
+                        1
+                      ),
+                    ]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("tfoot", [
+                _c("tr", [
+                  _c("th", [_vm._v("Produto")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Marca")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Tensão")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Ações")]),
+                ]),
               ]),
-            ]),
-          ]
-        ),
-      ]),
+            ]
+          ),
+        ]
+      ),
     ]),
   ])
 }
