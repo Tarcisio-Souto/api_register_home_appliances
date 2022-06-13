@@ -4321,63 +4321,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -4576,15 +4519,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     Layout: _Layout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  props: {
-    errors: Object,
-    marcas: Array
   },
   data: function data() {
     return {
@@ -4592,29 +4552,287 @@ __webpack_require__.r(__webpack_exports__);
         nome: null,
         fk_marca: null,
         descricao: null,
-        tensao: null
+        tensao: null,
+        marcas: [],
+        errors: []
       }
     };
   },
+  created: function created() {
+    var _this = this;
+
+    axios.get("/api/marcas/listar").then(function (response) {
+      _this.form.marcas = response.data;
+    });
+  },
   methods: {
     sendForm: function sendForm() {
-      this.$inertia.post("eletrodomesticos/registrar", this.form, {
-        forceFormData: true,
-        preserveScroll: false,
-        _token: this.$page.props.csrf_token,
-        preserveState: false,
-        onSuccess: function onSuccess() {
+      axios.post("/api/eletrodomesticos/registrar", this.form).then(function (res) {
+        if (res.data["success"]) {
           bootbox.alert({
             centerVertical: true,
             backdrop: true,
             closeButton: false,
             size: "large",
             title: "<img src='https://i0.wp.com/www.roteirospe.com/wp-content/uploads/2017/02/SEU-LOGO-AQUI-300x81-1-300x81-1.png?ssl=1'>",
-            message: "<i class='fas fa-check-circle' style='color:green'></i>&nbsp&nbsp" + "<span style='font-weight:bold; position: relative; top: 5px;'>Multa registrada com sucesso!</span>"
+            message: "<i class='fas fa-check-circle' style='color:green'></i>&nbsp&nbsp" + "<span style='font-weight:bold; position: relative; top: 5px;'>" + res.data["success"] + "</span>"
           });
-          $("#formAddMulta").reset();
+          $("#formCadEletro").each(function () {
+            this.reset();
+            $("#inputMarca").empty();
+          });
+        } else {
+          this.form.errors = res.data;
+          console.log(res.data);
         }
-      });
+      }.bind(this));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/EditEletrodomestico.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/EditEletrodomestico.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Layout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Layout.vue */ "./resources/js/Layout.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    Layout: _Layout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    id_eletro: String
+  },
+  data: function data() {
+    return {
+      form: {
+        id: null,
+        eletros: [],
+        marcas: [],
+        nome_eletro: null,
+        descricao: null,
+        tensao: null,
+        marca: null
+      }
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get("/api/marcas/listar").then(function (response) {
+      _this.form.marcas = response.data;
+    });
+    axios.get("/api/eletrodomesticos/visualizar/" + this.id_eletro).then(function (response) {
+      _this.form.eletros = response.data;
+      _this.form.id = _this.form.eletros[0]["id_eletro"], _this.form.nome_eletro = _this.form.eletros[0]["nome_eletro"], _this.form.descricao = _this.form.eletros[0]["descricao"];
+      _this.form.tensao = _this.form.eletros[0]["tensao"];
+      _this.form.marca = _this.form.eletros[0]["marca"];
+      console.log(_this.form.eletros);
+    });
+  },
+  methods: {
+    sendForm: function sendForm() {
+      axios.post("/api/eletrodomesticos/atualizar", this.form).then(function (res) {
+        if (res.data["success"]) {
+          bootbox.alert({
+            centerVertical: true,
+            backdrop: true,
+            closeButton: false,
+            size: "large",
+            title: "<img src='https://i0.wp.com/www.roteirospe.com/wp-content/uploads/2017/02/SEU-LOGO-AQUI-300x81-1-300x81-1.png?ssl=1'>",
+            message: "<i class='fas fa-check-circle' style='color:green'></i>&nbsp&nbsp" + "<span style='font-weight:bold; position: relative; top: 5px;'>" + res.data["success"] + "</span>"
+          });
+          $("#formCadEletro").each(function () {
+            this.reset();
+            $("#inputMarca").empty();
+          });
+        } else {
+          this.form.errors = res.data;
+          console.log(res.data);
+        }
+      }.bind(this));
     }
   }
 });
@@ -4692,6 +4910,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4699,15 +4923,21 @@ __webpack_require__.r(__webpack_exports__);
     Link: _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__.Link,
     Layout: _Layout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: {
-    eletros: Array
-  },
   data: function data() {
     return {
       form: {
-        id: null
+        id: null,
+        eletros: [],
+        aux_eletros: []
       }
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get("/api/eletrodomesticos/listar").then(function (response) {
+      _this.form.eletros = response.data;
+    });
   },
   methods: {
     sendForm: function sendForm(id) {
@@ -4718,7 +4948,7 @@ __webpack_require__.r(__webpack_exports__);
         closeButton: false,
         size: "large",
         title: "<img src='https://i0.wp.com/www.roteirospe.com/wp-content/uploads/2017/02/SEU-LOGO-AQUI-300x81-1-300x81-1.png?ssl=1'>",
-        message: "<i class='fas fa-exclamation-circle' style='color:red'></i></i>&nbsp&nbsp" + "<span style='font-weight:bold; position: relative; top: 5px;'>Deletar multa?</span>",
+        message: "<i class='fas fa-exclamation-circle' style='color:red'></i></i>&nbsp&nbsp" + "<span style='font-weight:bold; position: relative; top: 5px;'>Deletar produto?</span>",
         buttons: {
           cancel: {
             label: '<i class="fa fa-times"></i> Não'
@@ -4730,24 +4960,291 @@ __webpack_require__.r(__webpack_exports__);
         },
         callback: function callback(result) {
           if (result == true) {
-            v.$inertia.post("/api/eletrodomesticos/deletar/" + id, {
-              forceFormData: true,
-              preserveScroll: false,
-              _token: v.$page.props.csrf_token
-            });
+            axios.post("/api/eletrodomesticos/deletar/" + id).then(function (res) {
+              if (res.data["success"]) {
+                bootbox.alert({
+                  centerVertical: true,
+                  backdrop: true,
+                  closeButton: false,
+                  size: "large",
+                  title: "<img src='https://i0.wp.com/www.roteirospe.com/wp-content/uploads/2017/02/SEU-LOGO-AQUI-300x81-1-300x81-1.png?ssl=1'>",
+                  message: "<i class='fas fa-check-circle' style='color:green'></i>&nbsp&nbsp" + "<span style='font-weight:bold; position: relative; top: 5px;'>" + res.data["success"] + "</span>"
+                });
+              } else {
+                this.form.errors = res.data;
+                console.log(res.data);
+              }
+            }.bind(this));
           }
         }
       });
     }
   },
   mounted: function mounted() {
-    $(document).ready(function () {
-      $("#myTable").DataTable({
-        language: {
-          url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
-        }
-      });
+    $(document).ready(function () {});
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/Home.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/Home.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Layout */ "./resources/js/Layout.vue");
+/* harmony import */ var _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue */ "./node_modules/@inertiajs/inertia-vue/dist/index.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    Head: _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__.Head,
+    Layout: _Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    user: String
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Layout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Layout.vue */ "./resources/js/Layout.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    Layout: _Layout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    id_eletro: String
+  },
+  data: function data() {
+    return {
+      form: {
+        id: null,
+        eletros: [],
+        nome_eletro: null,
+        descricao: null,
+        tensao: null,
+        marca: null
+      }
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get("/api/eletrodomesticos/visualizar/" + this.id_eletro).then(function (response) {
+      _this.form.eletros = response.data;
+      _this.form.nome_eletro = _this.form.eletros[0]["nome_eletro"], _this.form.descricao = _this.form.eletros[0]["descricao"];
+      _this.form.tensao = _this.form.eletros[0]["tensao"];
+      _this.form.marca = _this.form.eletros[0]["marca"];
+      console.log(_this.form.eletros);
     });
+  },
+  methods: {
+    sendForm: function sendForm() {
+      this.$inertia.get("/eletrodomesticos/editar/" + this.id_eletro);
+    }
   }
 });
 
@@ -28769,6 +29266,45 @@ component.options.__file = "resources/js/Paginas/AddEletrodomesticos.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Paginas/EditEletrodomestico.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/Paginas/EditEletrodomestico.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _EditEletrodomestico_vue_vue_type_template_id_193fddf8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditEletrodomestico.vue?vue&type=template&id=193fddf8& */ "./resources/js/Paginas/EditEletrodomestico.vue?vue&type=template&id=193fddf8&");
+/* harmony import */ var _EditEletrodomestico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditEletrodomestico.vue?vue&type=script&lang=js& */ "./resources/js/Paginas/EditEletrodomestico.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditEletrodomestico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditEletrodomestico_vue_vue_type_template_id_193fddf8___WEBPACK_IMPORTED_MODULE_0__.render,
+  _EditEletrodomestico_vue_vue_type_template_id_193fddf8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Paginas/EditEletrodomestico.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Paginas/Eletrodomesticos.vue":
 /*!***************************************************!*\
   !*** ./resources/js/Paginas/Eletrodomesticos.vue ***!
@@ -28808,6 +29344,84 @@ component.options.__file = "resources/js/Paginas/Eletrodomesticos.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Paginas/Home.vue":
+/*!***************************************!*\
+  !*** ./resources/js/Paginas/Home.vue ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Home_vue_vue_type_template_id_785a873f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Home.vue?vue&type=template&id=785a873f& */ "./resources/js/Paginas/Home.vue?vue&type=template&id=785a873f&");
+/* harmony import */ var _Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home.vue?vue&type=script&lang=js& */ "./resources/js/Paginas/Home.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Home_vue_vue_type_template_id_785a873f___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Home_vue_vue_type_template_id_785a873f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Paginas/Home.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Paginas/ViewEletrodomestico.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/Paginas/ViewEletrodomestico.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ViewEletrodomestico_vue_vue_type_template_id_05c99089___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ViewEletrodomestico.vue?vue&type=template&id=05c99089& */ "./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=template&id=05c99089&");
+/* harmony import */ var _ViewEletrodomestico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ViewEletrodomestico.vue?vue&type=script&lang=js& */ "./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ViewEletrodomestico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ViewEletrodomestico_vue_vue_type_template_id_05c99089___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ViewEletrodomestico_vue_vue_type_template_id_05c99089___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Paginas/ViewEletrodomestico.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Layout.vue?vue&type=script&lang=js&":
 /*!**********************************************************!*\
   !*** ./resources/js/Layout.vue?vue&type=script&lang=js& ***!
@@ -28840,6 +29454,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Paginas/EditEletrodomestico.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/Paginas/EditEletrodomestico.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEletrodomestico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditEletrodomestico.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/EditEletrodomestico.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEletrodomestico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/Paginas/Eletrodomesticos.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/Paginas/Eletrodomesticos.vue?vue&type=script&lang=js& ***!
@@ -28853,6 +29483,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Eletrodomesticos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Eletrodomesticos.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/Eletrodomesticos.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Eletrodomesticos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Paginas/Home.vue?vue&type=script&lang=js&":
+/*!****************************************************************!*\
+  !*** ./resources/js/Paginas/Home.vue?vue&type=script&lang=js& ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Home.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/Home.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewEletrodomestico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ViewEletrodomestico.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewEletrodomestico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -28890,6 +29552,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Paginas/EditEletrodomestico.vue?vue&type=template&id=193fddf8&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/Paginas/EditEletrodomestico.vue?vue&type=template&id=193fddf8& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEletrodomestico_vue_vue_type_template_id_193fddf8___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEletrodomestico_vue_vue_type_template_id_193fddf8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEletrodomestico_vue_vue_type_template_id_193fddf8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditEletrodomestico.vue?vue&type=template&id=193fddf8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/EditEletrodomestico.vue?vue&type=template&id=193fddf8&");
+
+
+/***/ }),
+
 /***/ "./resources/js/Paginas/Eletrodomesticos.vue?vue&type=template&id=e47d4916&":
 /*!**********************************************************************************!*\
   !*** ./resources/js/Paginas/Eletrodomesticos.vue?vue&type=template&id=e47d4916& ***!
@@ -28903,6 +29582,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Eletrodomesticos_vue_vue_type_template_id_e47d4916___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Eletrodomesticos_vue_vue_type_template_id_e47d4916___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Eletrodomesticos.vue?vue&type=template&id=e47d4916& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/Eletrodomesticos.vue?vue&type=template&id=e47d4916&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Paginas/Home.vue?vue&type=template&id=785a873f&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/Paginas/Home.vue?vue&type=template&id=785a873f& ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_785a873f___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_785a873f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_785a873f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Home.vue?vue&type=template&id=785a873f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/Home.vue?vue&type=template&id=785a873f&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=template&id=05c99089&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=template&id=05c99089& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewEletrodomestico_vue_vue_type_template_id_05c99089___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewEletrodomestico_vue_vue_type_template_id_05c99089___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewEletrodomestico_vue_vue_type_template_id_05c99089___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ViewEletrodomestico.vue?vue&type=template&id=05c99089& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=template&id=05c99089&");
 
 
 /***/ }),
@@ -28964,7 +29677,24 @@ var render = function () {
                       [
                         _c(
                           "Link",
-                          { attrs: { href: "/colaborador/cadastro" } },
+                          { attrs: { href: "/eletrodomesticos/listar" } },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-solid fa-list icons-menu",
+                            }),
+                            _vm._v("Listar"),
+                          ]
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "Link",
+                          { attrs: { href: "/eletrodomesticos/novo" } },
                           [
                             _c("i", {
                               staticClass: "fas fa-user-plus icons-menu",
@@ -28975,286 +29705,15 @@ var render = function () {
                       ],
                       1
                     ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/colaborador/lista" } }, [
-                          _c("i", { staticClass: "fas fa-search icons-menu" }),
-                          _vm._v("Pesquisar"),
-                        ]),
-                      ],
-                      1
-                    ),
                   ]
                 ),
               ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "dropdown" }, [
-                _vm._m(2),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  {
-                    staticClass: "dropdown-menu animated fadeInLeft",
-                    attrs: { role: "menu" },
-                  },
-                  [
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/empresas/cadastro" } }, [
-                          _c("i", {
-                            staticClass: "fas fa-user-plus icons-menu",
-                          }),
-                          _vm._v("Cadastrar"),
-                        ]),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/empresas/lista" } }, [
-                          _c("i", { staticClass: "fas fa-search icons-menu" }),
-                          _vm._v("Pesquisar"),
-                        ]),
-                      ],
-                      1
-                    ),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "dropdown" }, [
-                _vm._m(3),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  {
-                    staticClass:
-                      "dropdown-menu animated fadeInLeft menuVeiculos",
-                    attrs: { role: "menu" },
-                  },
-                  [
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/veiculos/cadastro" } }, [
-                          _c("i", {
-                            staticClass: "fas fa-plus-circle icons-menu",
-                          }),
-                          _vm._v("Cadastrar"),
-                        ]),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/veiculos/lista" } }, [
-                          _c("i", { staticClass: "fas fa-search icons-menu" }),
-                          _vm._v("Pesquisar"),
-                        ]),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/fabricantes/lista" } }, [
-                          _c("i", {
-                            staticClass: "fas fa-industry icons-menu",
-                          }),
-                          _vm._v("Fabricantes"),
-                        ]),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/modelos/lista" } }, [
-                          _c("i", {
-                            staticClass: "fas fa-car-side icons-menu",
-                          }),
-                          _vm._v("Modelos"),
-                        ]),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/multas/lista" } }, [
-                          _c("i", {
-                            staticClass: "fas fa-traffic-light icons-menu",
-                          }),
-                          _vm._v("Multas"),
-                        ]),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/servicos/lista" } }, [
-                          _c("i", { staticClass: "fas fa-cogs icons-menu" }),
-                          _vm._v("Serviços"),
-                        ]),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/manutencoes/lista" } }, [
-                          _c("i", { staticClass: "fas fa-tools icons-menu" }),
-                          _vm._v("Manutenções"),
-                        ]),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "Link",
-                          { attrs: { href: "/abastecimentos/lista" } },
-                          [
-                            _c("i", {
-                              staticClass: "fas fa-gas-pump icons-menu",
-                            }),
-                            _vm._v("Abastecimentos"),
-                          ]
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/trocas-oleo/lista" } }, [
-                          _c("i", { staticClass: "fas fa-oil-can icons-menu" }),
-                          _vm._v("Trocas de Óleo"),
-                        ]),
-                      ],
-                      1
-                    ),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "dropdown" }, [
-                _vm._m(4),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  {
-                    staticClass: "dropdown-menu animated fadeInLeft",
-                    attrs: { role: "menu" },
-                  },
-                  [
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/oficinas/cadastro" } }, [
-                          _c("i", {
-                            staticClass: "fas fa-user-plus icons-menu",
-                          }),
-                          _vm._v("Cadastrar"),
-                        ]),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/oficinas/lista" } }, [
-                          _c("i", { staticClass: "fas fa-search icons-menu" }),
-                          _vm._v("Pesquisar"),
-                        ]),
-                      ],
-                      1
-                    ),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "dropdown" }, [
-                _vm._m(5),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  {
-                    staticClass: "dropdown-menu animated fadeInLeft",
-                    attrs: { role: "menu" },
-                  },
-                  [
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/postos/cadastro" } }, [
-                          _c("i", {
-                            staticClass: "fas fa-user-plus icons-menu",
-                          }),
-                          _vm._v("Cadastrar"),
-                        ]),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c("Link", { attrs: { href: "/postos/lista" } }, [
-                          _c("i", { staticClass: "fas fa-search icons-menu" }),
-                          _vm._v("Pesquisar"),
-                        ]),
-                      ],
-                      1
-                    ),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c("Link", { attrs: { href: "#sobre" } }, [
-                    _c("i", { staticClass: "fas fa-info-circle icons-menu" }),
-                    _vm._v("Sobre"),
-                  ]),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c("Link", { attrs: { href: "/logout" } }, [
-                    _c("i", { staticClass: "fas fa-sign-out-alt icons-menu" }),
-                    _vm._v("Sair"),
-                  ]),
-                ],
-                1
-              ),
             ]),
           ]
         ),
         _vm._v(" "),
         _c("div", { attrs: { id: "page-content-wrapper" } }, [
-          _vm._m(6),
+          _vm._m(2),
           _vm._v(" "),
           _c("div", { staticClass: "container" }, [
             _c("article", [_vm._t("default")], 2),
@@ -29294,64 +29753,9 @@ var staticRenderFns = [
         attrs: { href: "", "data-toggle": "dropdown" },
       },
       [
-        _c("i", { staticClass: "fas fa-users icons-menu" }),
-        _vm._v("Colaboradores"),
+        _c("i", { staticClass: "fas fa-solid fa-blender-phone icons-menu" }),
+        _vm._v("Eletrodomésticos"),
       ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "dropdown-toggle",
-        attrs: { href: "", "data-toggle": "dropdown" },
-      },
-      [
-        _c("i", { staticClass: "fas fa-building icons-menu" }),
-        _vm._v("Empresas"),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "dropdown-toggle",
-        attrs: { href: "", "data-toggle": "dropdown" },
-      },
-      [_c("i", { staticClass: "fas fa-car icons-menu" }), _vm._v("Veículos")]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "dropdown-toggle",
-        attrs: { href: "", "data-toggle": "dropdown" },
-      },
-      [_c("i", { staticClass: "fas fa-wrench icons-menu" }), _vm._v("Oficinas")]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "dropdown-toggle",
-        attrs: { href: "", "data-toggle": "dropdown" },
-      },
-      [_c("i", { staticClass: "fas fa-gas-pump icons-menu" }), _vm._v("Postos")]
     )
   },
   function () {
@@ -29416,7 +29820,7 @@ var render = function () {
         _c(
           "form",
           {
-            attrs: { enctype: "multipart/form-data", id: "formAddMulta" },
+            attrs: { enctype: "multipart/form-data", id: "formCadEletro" },
             on: {
               submit: function ($event) {
                 $event.preventDefault()
@@ -29428,6 +29832,461 @@ var render = function () {
             _c("h4", [
               _c("span", { staticStyle: { "font-weight": "bold" } }, [
                 _vm._v("Registrar"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "col-md-4" },
+                [
+                  _c("label", { attrs: { for: "inputNome" } }, [
+                    _vm._v("Nome"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("div", { staticClass: "input-group-prepend" }, [
+                      _c("div", { staticClass: "input-group-text" }, [
+                        _c("i", { staticClass: "fas fa-calendar-alt" }),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.nome,
+                          expression: "form.nome",
+                        },
+                      ],
+                      key: "",
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "inputNome", name: "txtNome" },
+                      domProps: { value: _vm.form.nome },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "nome", $event.target.value)
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(this.form.errors, function (erro) {
+                    return _c("div", { key: erro }, [
+                      erro["nome"]
+                        ? _c("div", [
+                            erro != ""
+                              ? _c(
+                                  "span",
+                                  { staticClass: "errors-label-notification" },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-exclamation-circle",
+                                    }),
+                                    _vm._v(
+                                      _vm._s(erro["nome"]) +
+                                        "\n                "
+                                    ),
+                                  ]
+                                )
+                              : _vm._e(),
+                          ])
+                        : _vm._e(),
+                    ])
+                  }),
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-md-4" },
+                [
+                  _c("label", { attrs: { for: "inputMarca" } }, [
+                    _vm._v("Marca"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("div", { staticClass: "input-group-prepend" }, [
+                      _c("div", { staticClass: "input-group-text" }, [
+                        _c("i", { staticClass: "fas fa-building" }),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.fk_marca,
+                            expression: "form.fk_marca",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "inputMarca", name: "txtMarca" },
+                        on: {
+                          change: function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "fk_marca",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          },
+                        },
+                      },
+                      _vm._l(this.form.marcas, function (marca) {
+                        return _c(
+                          "option",
+                          {
+                            key: marca.id_marca,
+                            domProps: { value: marca.id_marca },
+                          },
+                          [
+                            _vm._v(
+                              "\n                  " +
+                                _vm._s(marca.nome) +
+                                "\n                "
+                            ),
+                          ]
+                        )
+                      }),
+                      0
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(this.form.errors, function (erro) {
+                    return _c("div", { key: erro }, [
+                      erro["marca"]
+                        ? _c("div", [
+                            erro != ""
+                              ? _c(
+                                  "span",
+                                  { staticClass: "errors-label-notification" },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-exclamation-circle",
+                                    }),
+                                    _vm._v(
+                                      _vm._s(erro["marca"]) +
+                                        "\n                "
+                                    ),
+                                  ]
+                                )
+                              : _vm._e(),
+                          ])
+                        : _vm._e(),
+                    ])
+                  }),
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("label", { attrs: { for: "inputTensao" } }, [
+                  _vm._v("Tensão"),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-inline" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.tensao,
+                                expression: "form.tensao",
+                              },
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              name: "exampleRadios",
+                              id: "inputTensao1",
+                              value: "m",
+                            },
+                            domProps: { checked: _vm._q(_vm.form.tensao, "m") },
+                            on: {
+                              change: function ($event) {
+                                return _vm.$set(_vm.form, "tensao", "m")
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "exampleRadios1" },
+                            },
+                            [
+                              _vm._v(
+                                "\n                    110v\n                  "
+                              ),
+                            ]
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-inline" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.tensao,
+                                expression: "form.tensao",
+                              },
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              name: "exampleRadios",
+                              id: "inputTensao2",
+                              value: "110v",
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.form.tensao, "110v"),
+                            },
+                            on: {
+                              change: function ($event) {
+                                return _vm.$set(_vm.form, "tensao", "110v")
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "exampleRadios2" },
+                            },
+                            [
+                              _vm._v(
+                                "\n                    220v\n                  "
+                              ),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(this.form.errors, function (erro) {
+                      return _c("div", { key: erro }, [
+                        erro["tensao"]
+                          ? _c("div", [
+                              erro != ""
+                                ? _c(
+                                    "span",
+                                    {
+                                      staticClass: "errors-label-notification",
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass:
+                                          "fas fa-exclamation-circle",
+                                      }),
+                                      _vm._v(
+                                        _vm._s(erro["tensao"]) +
+                                          "\n                  "
+                                      ),
+                                    ]
+                                  )
+                                : _vm._e(),
+                            ])
+                          : _vm._e(),
+                      ])
+                    }),
+                  ],
+                  2
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _c("br"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "col-md-8" },
+                [
+                  _c("label", { attrs: { for: "inputDescricao" } }, [
+                    _vm._v("Descrição"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("div", { staticClass: "input-group-prepend" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.descricao,
+                            expression: "form.descricao",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "inputDescricao", rows: "3", cols: "100" },
+                        domProps: { value: _vm.form.descricao },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "descricao", $event.target.value)
+                          },
+                        },
+                      }),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(this.form.errors, function (erro) {
+                    return _c("div", { key: erro }, [
+                      erro["descricao"]
+                        ? _c("div", [
+                            erro != ""
+                              ? _c(
+                                  "span",
+                                  { staticClass: "errors-label-notification" },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-exclamation-circle",
+                                    }),
+                                    _vm._v(
+                                      _vm._s(erro["descricao"]) +
+                                        "\n                "
+                                    ),
+                                  ]
+                                )
+                              : _vm._e(),
+                          ])
+                        : _vm._e(),
+                    ])
+                  }),
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success align-btn-add",
+                    attrs: { type: "submit" },
+                  },
+                  [_vm._v("\n              Cadastrar\n            ")]
+                ),
+              ]),
+            ]),
+          ]
+        ),
+      ]),
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/EditEletrodomestico.vue?vue&type=template&id=193fddf8&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/EditEletrodomestico.vue?vue&type=template&id=193fddf8& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("layout", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4", attrs: { align: "center" } }, [
+        _c("h4", [_vm._v("Alterar Eletrodoméstico")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }),
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c(
+          "form",
+          {
+            attrs: { enctype: "multipart/form-data", id: "formCadEletro" },
+            on: {
+              submit: function ($event) {
+                $event.preventDefault()
+                return _vm.sendForm.apply(null, arguments)
+              },
+            },
+          },
+          [
+            _c("h4", [
+              _c("span", { staticStyle: { "font-weight": "bold" } }, [
+                _vm._v("Registro"),
               ]),
             ]),
             _vm._v(" "),
@@ -29449,29 +30308,27 @@ var render = function () {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.nome,
-                        expression: "form.nome",
+                        value: _vm.form.nome_eletro,
+                        expression: "form.nome_eletro",
                       },
                     ],
                     key: "",
                     staticClass: "form-control",
                     attrs: { type: "text", id: "inputNome", name: "txtNome" },
-                    domProps: { value: _vm.form.nome },
+                    domProps: { value: _vm.form.nome_eletro },
                     on: {
                       input: function ($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(_vm.form, "nome", $event.target.value)
+                        _vm.$set(_vm.form, "nome_eletro", $event.target.value)
                       },
                     },
                   }),
                 ]),
               ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-6" }, [
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
                 _c("label", { attrs: { for: "inputMarca" } }, [
                   _vm._v("Marca"),
                 ]),
@@ -29518,15 +30375,15 @@ var render = function () {
                     },
                     [
                       _c("option", { attrs: { selected: "" } }, [
-                        _vm._v("Selecione a marca"),
+                        _vm._v(_vm._s(_vm.form.marca)),
                       ]),
                       _vm._v(" "),
-                      _vm._l(_vm.marcas, function (marca) {
+                      _vm._l(this.form.marcas, function (marca) {
                         return _c(
                           "option",
                           {
                             key: marca.id_marca,
-                            domProps: { value: marca.id_marca },
+                            domProps: { value: marca.nome },
                           },
                           [
                             _vm._v(
@@ -29543,50 +30400,6 @@ var render = function () {
                 ]),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("label", { attrs: { for: "inputDescricao" } }, [
-                    _vm._v("Descrição"),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group" }, [
-                    _c("div", { staticClass: "input-group-prepend" }, [
-                      _c("div", { staticClass: "input-group-text" }, [
-                        _c("i", { staticClass: "fas fa-calendar-alt" }),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "inputDescricao" } }, [
-                        _vm._v("Descrição"),
-                      ]),
-                      _vm._v(" "),
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.descricao,
-                            expression: "form.descricao",
-                          },
-                        ],
-                        staticClass: "form-control",
-                        attrs: { id: "inputDescricao", rows: "3" },
-                        domProps: { value: _vm.form.descricao },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.form, "descricao", $event.target.value)
-                          },
-                        },
-                      }),
-                    ]),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
               _c("div", { staticClass: "col-md-4" }, [
                 _c("label", { attrs: { for: "inputTensao" } }, [
                   _vm._v("Tensão"),
@@ -29594,97 +30407,174 @@ var render = function () {
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-12" }, [
-                    _c("div", { staticClass: "form-check form-check-inline" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.tensao,
-                            expression: "form.tensao",
-                          },
-                        ],
-                        staticClass: "form-check-input",
-                        attrs: {
-                          type: "radio",
-                          name: "exampleRadios",
-                          id: "inputTensao1",
-                          value: "m",
-                        },
-                        domProps: { checked: _vm._q(_vm.form.tensao, "m") },
-                        on: {
-                          change: function ($event) {
-                            return _vm.$set(_vm.form, "tensao", "m")
-                          },
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-check-label",
-                          attrs: { for: "exampleRadios1" },
-                        },
-                        [
-                          _vm._v(
-                            "\n                    110v\n                  "
-                          ),
-                        ]
-                      ),
-                    ]),
+                    _vm.form.tensao == "110v"
+                      ? _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "exampleRadios",
+                                id: "inputTensao1",
+                                value: "110v",
+                                checked: "",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "exampleRadios1" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    110v\n                  "
+                                ),
+                              ]
+                            ),
+                          ]
+                        )
+                      : _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "exampleRadios",
+                                id: "inputTensao2",
+                                value: "220v",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "exampleRadios2" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    220v\n                  "
+                                ),
+                              ]
+                            ),
+                          ]
+                        ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "form-check form-check-inline" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.tensao,
-                            expression: "form.tensao",
-                          },
-                        ],
-                        staticClass: "form-check-input",
-                        attrs: {
-                          type: "radio",
-                          name: "exampleRadios",
-                          id: "inputTensao2",
-                          value: "110v",
-                        },
-                        domProps: { checked: _vm._q(_vm.form.tensao, "110v") },
-                        on: {
-                          change: function ($event) {
-                            return _vm.$set(_vm.form, "tensao", "110v")
-                          },
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-check-label",
-                          attrs: { for: "exampleRadios2" },
-                        },
-                        [
-                          _vm._v(
-                            "\n                    220v\n                  "
-                          ),
-                        ]
-                      ),
-                    ]),
+                    _vm.form.tensao == "220v"
+                      ? _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "exampleRadios",
+                                id: "inputTensao1",
+                                value: "220v",
+                                checked: "",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "exampleRadios1" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    220v\n                  "
+                                ),
+                              ]
+                            ),
+                          ]
+                        )
+                      : _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "exampleRadios",
+                                id: "inputTensao2",
+                                value: "110v",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "exampleRadios2" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    110v\n                  "
+                                ),
+                              ]
+                            ),
+                          ]
+                        ),
                   ]),
                 ]),
               ]),
             ]),
             _vm._v(" "),
-            _c("div", [
+            _c("br"),
+            _c("br"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-8" }, [
+                _c("label", { attrs: { for: "inputDescricao" } }, [
+                  _vm._v("Descrição"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("div", { staticClass: "input-group-prepend" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.descricao,
+                          expression: "form.descricao",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "inputDescricao", rows: "3", cols: "100" },
+                      domProps: { value: _vm.form.descricao },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "descricao", $event.target.value)
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
               _c("div", { staticClass: "col-md-4" }, [
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-success btnCadastrar",
+                    staticClass: "btn btn-success align-btn-add",
                     attrs: { type: "submit" },
                   },
-                  [_vm._v("\n              Cadastrar\n            ")]
+                  [_vm._v("\n              Atualizar\n            ")]
                 ),
               ]),
             ]),
@@ -29746,7 +30636,7 @@ var render = function () {
               "Link",
               {
                 staticClass: "btn btn-primary btnNovo",
-                attrs: { href: "/api/eletrodomesticos/novo" },
+                attrs: { href: "/eletrodomesticos/novo" },
               },
               [_vm._v("Novo")]
             ),
@@ -29761,7 +30651,7 @@ var render = function () {
           {
             staticClass: "table table-striped table-bordered table-hover",
             staticStyle: { width: "100%" },
-            attrs: { id: "myTable" },
+            attrs: { id: "tbl-list-eletros" },
           },
           [
             _c("thead", [
@@ -29778,7 +30668,7 @@ var render = function () {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.eletros, function (eletro) {
+              _vm._l(this.form.eletros, function (eletro) {
                 return _c(
                   "tr",
                   { key: eletro.eletro_id, attrs: { value: eletro.eletro_id } },
@@ -29798,7 +30688,7 @@ var render = function () {
                           {
                             attrs: {
                               href:
-                                "/api/eletrodomesticos/visualizar/" +
+                                "/eletrodomesticos/visualizar/" +
                                 eletro.id_eletro,
                             },
                           },
@@ -29851,6 +30741,412 @@ var render = function () {
         ),
       ]),
     ]),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/Home.vue?vue&type=template&id=785a873f&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/Home.vue?vue&type=template&id=785a873f& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "layout",
+    [
+      _c("Head", { attrs: { title: "Welcome" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-md-12" },
+          [_c("H1", [_vm._v("Bem-vindo!")])],
+          1
+        ),
+      ]),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=template&id=05c99089&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Paginas/ViewEletrodomestico.vue?vue&type=template&id=05c99089& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("layout", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4", attrs: { align: "center" } }, [
+        _c("h4", [_vm._v("Visualizar Eletrodoméstico")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }),
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c(
+          "form",
+          {
+            attrs: { enctype: "multipart/form-data", id: "formCadEletro" },
+            on: {
+              submit: function ($event) {
+                $event.preventDefault()
+                return _vm.sendForm.apply(null, arguments)
+              },
+            },
+          },
+          [
+            _c("h4", [
+              _c("span", { staticStyle: { "font-weight": "bold" } }, [
+                _vm._v("Visualizar Cadastro"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("label", { attrs: { for: "inputNome" } }, [_vm._v("Nome")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("div", { staticClass: "input-group-prepend" }, [
+                    _c("div", { staticClass: "input-group-text" }, [
+                      _c("i", { staticClass: "fas fa-calendar-alt" }),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.nome_eletro,
+                        expression: "form.nome_eletro",
+                      },
+                    ],
+                    key: "",
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "inputNome",
+                      name: "txtNome",
+                      disabled: "",
+                    },
+                    domProps: { value: _vm.form.nome_eletro },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "nome_eletro", $event.target.value)
+                      },
+                    },
+                  }),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("label", { attrs: { for: "inputMarca" } }, [
+                  _vm._v("Marca"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("div", { staticClass: "input-group-prepend" }, [
+                    _c("div", { staticClass: "input-group-text" }, [
+                      _c("i", { staticClass: "fas fa-building" }),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.marca,
+                          expression: "form.marca",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "inputMarca",
+                        name: "txtMarca",
+                        disabled: "",
+                      },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form,
+                            "marca",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                      },
+                    },
+                    [_c("option", [_vm._v(_vm._s(_vm.form.marca))])]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("label", { attrs: { for: "inputTensao" } }, [
+                  _vm._v("Tensão"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _vm.form.tensao == "110v"
+                      ? _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "exampleRadios",
+                                id: "inputTensao1",
+                                value: "110v",
+                                checked: "",
+                                disabled: "",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "exampleRadios1" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    110v\n                  "
+                                ),
+                              ]
+                            ),
+                          ]
+                        )
+                      : _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "exampleRadios",
+                                id: "inputTensao2",
+                                value: "220v",
+                                disabled: "",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "exampleRadios2" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    220v\n                  "
+                                ),
+                              ]
+                            ),
+                          ]
+                        ),
+                    _vm._v(" "),
+                    _vm.form.tensao == "220v"
+                      ? _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "exampleRadios",
+                                id: "inputTensao1",
+                                value: "220v",
+                                checked: "",
+                                disabled: "",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "exampleRadios1" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    220v\n                  "
+                                ),
+                              ]
+                            ),
+                          ]
+                        )
+                      : _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "exampleRadios",
+                                id: "inputTensao2",
+                                value: "110v",
+                                disabled: "",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "exampleRadios2" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    110v\n                  "
+                                ),
+                              ]
+                            ),
+                          ]
+                        ),
+                  ]),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _c("br"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-8" }, [
+                _c("label", { attrs: { for: "inputDescricao" } }, [
+                  _vm._v("Descrição"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("div", { staticClass: "input-group-prepend" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.descricao,
+                          expression: "form.descricao",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "inputDescricao",
+                        rows: "3",
+                        cols: "100",
+                        disabled: "",
+                      },
+                      domProps: { value: _vm.form.descricao },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "descricao", $event.target.value)
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-warning align-btn-add",
+                    attrs: { type: "submit" },
+                  },
+                  [_vm._v("\n              Alterar\n            ")]
+                ),
+              ]),
+            ]),
+          ]
+        ),
+      ]),
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
+    _c("br"),
   ])
 }
 var staticRenderFns = []
@@ -42026,8 +43322,14 @@ Vue.compile = compileToFunctions;
 var map = {
 	"./AddEletrodomesticos": "./resources/js/Paginas/AddEletrodomesticos.vue",
 	"./AddEletrodomesticos.vue": "./resources/js/Paginas/AddEletrodomesticos.vue",
+	"./EditEletrodomestico": "./resources/js/Paginas/EditEletrodomestico.vue",
+	"./EditEletrodomestico.vue": "./resources/js/Paginas/EditEletrodomestico.vue",
 	"./Eletrodomesticos": "./resources/js/Paginas/Eletrodomesticos.vue",
-	"./Eletrodomesticos.vue": "./resources/js/Paginas/Eletrodomesticos.vue"
+	"./Eletrodomesticos.vue": "./resources/js/Paginas/Eletrodomesticos.vue",
+	"./Home": "./resources/js/Paginas/Home.vue",
+	"./Home.vue": "./resources/js/Paginas/Home.vue",
+	"./ViewEletrodomestico": "./resources/js/Paginas/ViewEletrodomestico.vue",
+	"./ViewEletrodomestico.vue": "./resources/js/Paginas/ViewEletrodomestico.vue"
 };
 
 

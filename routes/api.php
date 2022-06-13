@@ -1,20 +1,18 @@
 <?php
 
-use App\Http\Controllers\EletrodomesticosController;
-use App\Http\Controllers\HomeController;
-use App\Models\Eletrodomesticos;
+use App\Http\Controllers\Api\EletrodomesticosControllerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/marcas/listar', [EletrodomesticosControllerApi::class, 'listAllMarcas'])->name('eletros.api_marcas');
 
-Route::get('/eletrodomesticos/novo', [EletrodomesticosController::class, 'create'])->name('eletros.create');
-Route::get('/eletrodomesticos/visualizar/{id}', [EletrodomesticosController::class, 'show'])->name('eletros.show');
-Route::get('/eletrodomesticos/editar', [EletrodomesticosController::class, 'edit'])->name('eletros.edit');
-Route::post('/eletrodomesticos/atualizar', [EletrodomesticosController::class, 'update'])->name('eletros.update');
-Route::post('/eletrodomesticos/deletar/{id}', [EletrodomesticosController::class, 'delete'])->name('eletros.delete');
+Route::get('/eletrodomesticos/listar', [EletrodomesticosControllerApi::class, 'index'])->name('eletros.api_index');
+Route::get('/eletrodomesticos/visualizar/{id}', [EletrodomesticosControllerApi::class, 'show'])->name('eletros.api_show');
+Route::post('/eletrodomesticos/registrar', [EletrodomesticosControllerApi::class, 'store'])->name('eletros.api_store');
+Route::post('/eletrodomesticos/atualizar', [EletrodomesticosControllerApi::class, 'update'])->name('eletros.api_update');
+Route::post('/eletrodomesticos/deletar/{id}', [EletrodomesticosControllerApi::class, 'delete'])->name('eletros.api_delete');
 
 
 

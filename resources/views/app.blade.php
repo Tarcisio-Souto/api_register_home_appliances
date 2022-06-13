@@ -31,6 +31,12 @@
     <script src="https://kit.fontawesome.com/3d7779fa7f.js" crossorigin="anonymous"></script>
 
 
+    <!-- Bootbox JS -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.js"></script>
+
+
     @inertiaHead
 </head>
 

@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-md-4"></div>
       <div class="col-md-4" align="center">
-        <h4>Cadastrar Eletrodomésticos</h4>
+        <h4>Alterar Eletrodoméstico</h4>
       </div>
       <div class="col-md-4"></div>
     </div>
@@ -19,7 +19,7 @@
           enctype="multipart/form-data"
           id="formCadEletro"
         >
-          <h4><span style="font-weight: bold">Registrar</span></h4>
+          <h4><span style="font-weight: bold">Registro</span></h4>
           <br />
 
           <div class="row">
@@ -36,16 +36,9 @@
                   type="text"
                   id="inputNome"
                   class="form-control"
-                  v-model="form.nome"
+                  v-model="form.nome_eletro"
                   name="txtNome"
                 />
-              </div>
-              <div v-for="erro in this.form.errors" :key="erro">
-                <div v-if="erro['nome']">
-                  <span v-if="erro != ''" class="errors-label-notification">
-                    <i class="fas fa-exclamation-circle"></i>{{ erro["nome"] }}
-                  </span>
-                </div>
               </div>
             </div>
 
@@ -60,24 +53,18 @@
                 <select
                   id="inputMarca"
                   class="form-control"
-                  v-model="form.fk_marca"
+                  v-model="form.marca"
                   name="txtMarca"
                 >
+                  <option selected>{{ form.marca }}</option>
                   <option
                     v-for="marca in this.form.marcas"
                     :key="marca.id_marca"
-                    :value="marca.id_marca"
+                    :value="marca.nome"
                   >
                     {{ marca.nome }}
                   </option>
                 </select>
-              </div>
-              <div v-for="erro in this.form.errors" :key="erro">
-                <div v-if="erro['marca']">
-                  <span v-if="erro != ''" class="errors-label-notification">
-                    <i class="fas fa-exclamation-circle"></i>{{ erro["marca"] }}
-                  </span>
-                </div>
               </div>
             </div>
 
@@ -85,39 +72,62 @@
               <label for="inputTensao">Tensão</label>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-check form-check-inline">
+                  <div
+                    class="form-check form-check-inline"
+                    v-if="form.tensao == '110v'"
+                  >
                     <input
                       class="form-check-input"
                       type="radio"
                       name="exampleRadios"
                       id="inputTensao1"
-                      value="m"
-                      v-model="form.tensao"
+                      value="110v"
+                      checked
                     />
                     <label class="form-check-label" for="exampleRadios1">
                       110v
                     </label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check form-check-inline" v-else>
                     <input
                       class="form-check-input"
                       type="radio"
                       name="exampleRadios"
                       id="inputTensao2"
-                      v-model="form.tensao"
-                      value="110v"
+                      value="220v"
                     />
                     <label class="form-check-label" for="exampleRadios2">
                       220v
                     </label>
                   </div>
-                </div>
-                <div v-for="erro in this.form.errors" :key="erro">
-                  <div v-if="erro['tensao']">
-                    <span v-if="erro != ''" class="errors-label-notification">
-                      <i class="fas fa-exclamation-circle"></i
-                      >{{ erro["tensao"] }}
-                    </span>
+
+                  <div
+                    class="form-check form-check-inline"
+                    v-if="form.tensao == '220v'"
+                  >
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="exampleRadios"
+                      id="inputTensao1"
+                      value="220v"
+                      checked
+                    />
+                    <label class="form-check-label" for="exampleRadios1">
+                      220v
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline" v-else>
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="exampleRadios"
+                      id="inputTensao2"
+                      value="110v"
+                    />
+                    <label class="form-check-label" for="exampleRadios2">
+                      110v
+                    </label>
                   </div>
                 </div>
               </div>
@@ -140,18 +150,10 @@
                   ></textarea>
                 </div>
               </div>
-              <div v-for="erro in this.form.errors" :key="erro">
-                <div v-if="erro['descricao']">
-                  <span v-if="erro != ''" class="errors-label-notification">
-                    <i class="fas fa-exclamation-circle"></i
-                    >{{ erro["descricao"] }}
-                  </span>
-                </div>
-              </div>
             </div>
             <div class="col-md-4">
               <button type="submit" class="btn btn-success align-btn-add">
-                Cadastrar
+                Atualizar
               </button>
             </div>
           </div>
@@ -176,15 +178,20 @@ export default {
     Layout,
   },
 
+  props: {
+    id_eletro: String,
+  },
+
   data() {
     return {
       form: {
-        nome: null,
-        fk_marca: null,
+        id: null,
+        eletros: [],
+        marcas: [],
+        nome_eletro: null,
         descricao: null,
         tensao: null,
-        marcas: [],
-        errors: [],
+        marca: null,
       },
     };
   },
@@ -193,13 +200,27 @@ export default {
     axios.get("/api/marcas/listar").then((response) => {
       this.form.marcas = response.data;
     });
+
+    axios
+      .get("/api/eletrodomesticos/visualizar/" + this.id_eletro)
+      .then((response) => {
+        this.form.eletros = response.data;
+        (this.form.id = this.form.eletros[0]["id_eletro"]),
+          (this.form.nome_eletro = this.form.eletros[0]["nome_eletro"]),
+          (this.form.descricao = this.form.eletros[0]["descricao"]);
+        this.form.tensao = this.form.eletros[0]["tensao"];
+        this.form.marca = this.form.eletros[0]["marca"];
+
+        console.log(this.form.eletros);
+      });
   },
 
   methods: {
     sendForm() {
-      axios.post("/api/eletrodomesticos/registrar", this.form).then(
+      axios.post("/api/eletrodomesticos/atualizar", this.form).then(
         function (res) {
           if (res.data["success"]) {
+            
             bootbox.alert({
               centerVertical: true,
               backdrop: true,
@@ -213,6 +234,7 @@ export default {
                 res.data["success"] +
                 "</span>",
             });
+        
             $("#formCadEletro").each(function () {
               this.reset();
               $("#inputMarca").empty();

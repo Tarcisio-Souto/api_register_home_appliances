@@ -1,81 +1,91 @@
 <template>
-    <layout>
-  <div class="container">
+  <layout>
+    <div class="container">
+      <div class="row btn-actions">
+        <div class="col-md-12">
+          <Link :href="'/eletrodomesticos/novo'" class="btn btn-primary btnNovo"
+            >Novo</Link
+          >
+        </div>
+      </div>
 
-    <div class="row btn-actions">
-      <div class="col-md-12">
-        <Link :href="'/api/eletrodomesticos/novo'" class="btn btn-primary btnNovo"
-          >Novo</Link
+      <div class="table-responsive-lg">
+        <table
+          id="tbl-list-eletros"
+          class="table table-striped table-bordered table-hover"
+          style="width: 100%"
         >
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Marca</th>
+              <th>Tensão</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="eletro in this.form.eletros"
+              :key="eletro.eletro_id"
+              :value="eletro.eletro_id"
+            >
+              <td>{{ eletro.nome_eletro }}</td>
+              <td>{{ eletro.marca }}</td>
+              <td>{{ eletro.tensao }}</td>
+              <td align="center">
+                <Link :href="'/eletrodomesticos/visualizar/' + eletro.id_eletro"
+                  ><i class="fas fa-eye"></i
+                ></Link>
+                <Link :href="'/api/eletrodomesticos/editar/' + eletro.id_eletro"
+                  ><i class="fas fa-edit"></i
+                ></Link>
+                <span
+                  ><i
+                    class="fas fa-trash-alt"
+                    @click="sendForm(eletro.id_eletro)"
+                  ></i
+                ></span>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>Produto</th>
+              <th>Marca</th>
+              <th>Tensão</th>
+              <th>Ações</th>
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
-
-    <div class="table-responsive-lg">
-      <table
-        id="myTable"
-        class="table table-striped table-bordered table-hover"
-        style="width: 100%"
-      >
-        <thead>
-          <tr>
-            <th>Produto</th>
-            <th>Marca</th>
-            <th>Tensão</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="eletro in eletros" :key="eletro.eletro_id" :value="eletro.eletro_id">
-            <td>{{ eletro.nome_eletro }}</td>
-            <td>{{ eletro.marca }}</td>
-            <td>{{ eletro.tensao }}</td>
-            <td align="center">
-              <Link :href="'/api/eletrodomesticos/visualizar/' + eletro.id_eletro"
-                ><i class="fas fa-eye"></i
-              ></Link>
-              <Link :href="'/api/eletrodomesticos/editar/' + eletro.id_eletro"
-                ><i class="fas fa-edit"></i
-              ></Link>
-              <span
-                ><i class="fas fa-trash-alt" @click="sendForm(eletro.id_eletro)"></i
-              ></span>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th>Produto</th>
-            <th>Marca</th>
-            <th>Tensão</th>
-            <th>Ações</th>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-  </div>
   </layout>
 </template>
 
 <script>
-
-import Layout from '../Layout.vue'
+import Layout from "../Layout.vue";
 import { Link } from "@inertiajs/inertia-vue";
 
 export default {
   components: {
     Link,
-    Layout
-  },
-  props: {
-    eletros: Array,
+    Layout,
   },
 
   data: () => {
     return {
       form: {
-        id: null
+        id: null,
+        eletros: [],
+        aux_eletros: []
       },
     };
+  },
+
+  created() {
+    axios.get("/api/eletrodomesticos/listar").then((response) => {
+      this.form.eletros = response.data;
+    });
   },
 
   methods: {
@@ -91,7 +101,7 @@ export default {
           "<img src='https://i0.wp.com/www.roteirospe.com/wp-content/uploads/2017/02/SEU-LOGO-AQUI-300x81-1-300x81-1.png?ssl=1'>",
         message:
           "<i class='fas fa-exclamation-circle' style='color:red'></i></i>&nbsp&nbsp" +
-          "<span style='font-weight:bold; position: relative; top: 5px;'>Deletar multa?</span>",
+          "<span style='font-weight:bold; position: relative; top: 5px;'>Deletar produto?</span>",
         buttons: {
           cancel: {
             label: '<i class="fa fa-times"></i> Não',
@@ -103,24 +113,36 @@ export default {
         },
         callback: function (result) {
           if (result == true) {
-            v.$inertia.post("/api/eletrodomesticos/deletar/" + id, {
-              forceFormData: true,
-              preserveScroll: false,
-              _token: v.$page.props.csrf_token,
-            });
+            axios.post("/api/eletrodomesticos/deletar/" + id).then(
+              function (res) {
+                if (res.data["success"]) {
+
+                  bootbox.alert({
+                    centerVertical: true,
+                    backdrop: true,
+                    closeButton: false,
+                    size: "large",
+                    title:
+                      "<img src='https://i0.wp.com/www.roteirospe.com/wp-content/uploads/2017/02/SEU-LOGO-AQUI-300x81-1-300x81-1.png?ssl=1'>",
+                    message:
+                      "<i class='fas fa-check-circle' style='color:green'></i>&nbsp&nbsp" +
+                      "<span style='font-weight:bold; position: relative; top: 5px;'>" +
+                      res.data["success"] +
+                      "</span>",
+                  });
+                } else {
+                  this.form.errors = res.data;
+                  console.log(res.data);
+                }
+              }.bind(this)
+            );
           }
         },
       });
     },
   },
   mounted() {
-    $(document).ready(function () {
-      $("#myTable").DataTable({
-        language: {
-          url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json",
-        },
-      });
-    });
+    $(document).ready(function () {});
   },
 };
 </script>

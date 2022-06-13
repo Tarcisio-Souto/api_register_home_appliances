@@ -8,12 +8,22 @@ use Inertia\Inertia;
 
 class EletrodomesticosController extends Controller
 {
+
+    public function index() {
+        return Inertia::render('Eletrodomesticos');
+    }
+
     
     public static function create() {
+        return Inertia::render('AddEletrodomesticos');
+    }
 
-        $marcas = Marcas::getMarcas();
-        return Inertia::render('AddEletrodomesticos', ['marcas' => $marcas]);
+    public static function show($id) {
+        return Inertia::render('ViewEletrodomestico', ['id_eletro' => $id]);
+    }
 
+    public static function edit($id) {
+        return Inertia::render('EditEletrodomestico', ['id_eletro' => $id]);
     }
 
 }

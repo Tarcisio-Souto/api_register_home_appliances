@@ -11,8 +11,7 @@ class HomeController extends Controller
     
     public function index(){
 
-        $eletros = Eletrodomesticos::listAllEletros();
-        return Inertia::render('Eletrodomesticos', ['eletros' => $eletros]);
+        return Inertia::render('Home');
 
     }
 

@@ -23,5 +23,22 @@ class Eletrodomesticos extends Model
     }
 
 
+    public static function getEletro($id) {
+
+        $eletro = DB::table('eletrodomesticos as elet')
+        ->join('marcas as mc', 'mc.id', '=', 'elet.fk_marca')
+        ->select('elet.id as id_eletro', 'mc.id as id_marca', 'elet.nome as nome_eletro', 'descricao', 
+                'tensao', 'mc.nome as marca')
+        ->where('elet.id', '=', $id)
+        ->get();
+
+        return $eletro;
+
+    }
+
+
+
+
+
 
 }
