@@ -507,10 +507,10 @@ a[href*="#contact"]::before {
 }
 
 
-/* DataTables */
+/* Tabela */
 
 #myTable th {
-    background-color: #af4a4a;
+    background-color: #218a3b;
     font-weight: 500;
     height: 5px !important;
     font-size: 12px;
@@ -665,4 +665,9 @@ a[href*="#contact"]::before {
 .fa-list {
     position: relative;
     margin-left: -30px;
+}
+
+.header-list {
+    position: relative;
+    top: 50px !important;
 }

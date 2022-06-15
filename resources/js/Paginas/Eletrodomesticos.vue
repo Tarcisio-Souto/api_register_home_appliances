@@ -1,20 +1,22 @@
 <template>
   <layout>
     <div class="container">
-      <div class="row btn-actions">
-        <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4 btn-actions">
           <Link :href="'/eletrodomesticos/novo'" class="btn btn-primary btnNovo"
             >Novo</Link
           >
         </div>
-      </div>
-
-      <input type="text" v-model="form.search" />
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <input type="text" v-model="form.search" class="form-control" placeholder="Pesquise o nome do produto"/>
+        </div>
+      </div>      
       <br /><br />
 
       <div class="table-responsive-lg" id="div_table">
         <table
-          id="tbl-list-eletros"
+          id="myTable"
           class="table table-striped table-bordered table-hover"
           style="width: 100%"
         >
@@ -61,8 +63,8 @@
           </tfoot>
         </table>
         <p>
-          <button @click="prevPage">Anterior</button>
-          <button @click="nextPage">Próximo</button>
+          <button @click="prevPage" class="btn btn-secondary">Anterior</button>
+          <button @click="nextPage" class="btn btn-secondary">Próximo</button>
         </p>
       </div>
     </div>

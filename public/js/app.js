@@ -4925,6 +4925,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -30675,10 +30677,10 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("layout", [
     _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row btn-actions" }, [
+      _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-md-12" },
+          { staticClass: "col-md-4 btn-actions" },
           [
             _c(
               "Link",
@@ -30691,28 +30693,33 @@ var render = function () {
           ],
           1
         ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.search,
+                expression: "form.search",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Pesquise o nome do produto" },
+            domProps: { value: _vm.form.search },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "search", $event.target.value)
+              },
+            },
+          }),
+        ]),
       ]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.form.search,
-            expression: "form.search",
-          },
-        ],
-        attrs: { type: "text" },
-        domProps: { value: _vm.form.search },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.form, "search", $event.target.value)
-          },
-        },
-      }),
       _vm._v(" "),
       _c("br"),
       _c("br"),
@@ -30726,7 +30733,7 @@ var render = function () {
             {
               staticClass: "table table-striped table-bordered table-hover",
               staticStyle: { width: "100%" },
-              attrs: { id: "tbl-list-eletros" },
+              attrs: { id: "myTable" },
             },
             [
               _c("thead", [
@@ -30849,9 +30856,17 @@ var render = function () {
           ),
           _vm._v(" "),
           _c("p", [
-            _c("button", { on: { click: _vm.prevPage } }, [_vm._v("Anterior")]),
+            _c(
+              "button",
+              { staticClass: "btn btn-secondary", on: { click: _vm.prevPage } },
+              [_vm._v("Anterior")]
+            ),
             _vm._v(" "),
-            _c("button", { on: { click: _vm.nextPage } }, [_vm._v("Próximo")]),
+            _c(
+              "button",
+              { staticClass: "btn btn-secondary", on: { click: _vm.nextPage } },
+              [_vm._v("Próximo")]
+            ),
           ]),
         ]
       ),
