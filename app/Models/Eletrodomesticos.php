@@ -16,6 +16,7 @@ class Eletrodomesticos extends Model
         ->join('marcas as mc', 'mc.id', '=', 'elet.fk_marca')
         ->select('elet.id as id_eletro', 'mc.id as id_marca', 'elet.nome as nome_eletro', 'descricao', 
                 'tensao', 'mc.nome as marca')
+                ->orderBy('elet.nome', 'asc')
         ->get();
 
         return $eletros;

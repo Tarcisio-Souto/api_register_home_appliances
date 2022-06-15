@@ -4930,7 +4930,8 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         id: null,
         eletros: [],
-        aux_eletros: []
+        currentSort: "produto",
+        currentSortDir: "asc"
       }
     };
   },
@@ -4942,6 +4943,14 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    sort: function sort(s) {
+      //if s == current sort, reverse
+      if (s === this.form.currentSort) {
+        this.form.currentSortDir = this.form.currentSortDir === "asc" ? "desc" : "asc";
+      }
+
+      this.form.currentSort = s;
+    },
     sendForm: function sendForm(id) {
       var v = this;
       bootbox.confirm({
@@ -4972,7 +4981,7 @@ __webpack_require__.r(__webpack_exports__);
                   title: "<img src='https://i0.wp.com/www.roteirospe.com/wp-content/uploads/2017/02/SEU-LOGO-AQUI-300x81-1-300x81-1.png?ssl=1'>",
                   message: "<i class='fas fa-check-circle' style='color:green'></i>&nbsp&nbsp" + "<span style='font-weight:bold; position: relative; top: 5px;'>" + res.data["success"] + "</span>"
                 });
-                $('#div_table').load(location.href + "#div_table");
+                $("#div_table").load(location.href + "#div_table");
               } else {
                 this.form.errors = res.data;
                 console.log(res.data);
@@ -4983,8 +4992,25 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  mounted: function mounted() {
-    $(document).ready(function () {});
+  computed: {
+    sortedEletros: function sortedEletros() {
+      var _this2 = this;
+
+      return this.form.eletros.sort(function (a, b) {
+        var modifier = 1;
+        if (_this2.form.currentSortDir === "asc") modifier = -1;
+
+        if (a[_this2.form.currentSort] < b[_this2.form.currentSort]) {
+          return -1 * modifier;
+        }
+
+        if (a[_this2.form.currentSort] > b[_this2.form.currentSort]) {
+          return 1 * modifier;
+        }
+
+        return 0;
+      });
+    }
   }
 });
 
@@ -30659,11 +30685,41 @@ var render = function () {
             [
               _c("thead", [
                 _c("tr", [
-                  _c("th", [_vm._v("Produto")]),
+                  _c(
+                    "th",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.sort("nome_eletro")
+                        },
+                      },
+                    },
+                    [_vm._v("Produto")]
+                  ),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Marca")]),
+                  _c(
+                    "th",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.sort("marca")
+                        },
+                      },
+                    },
+                    [_vm._v("Marca")]
+                  ),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Tensão")]),
+                  _c(
+                    "th",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.sort("tensao")
+                        },
+                      },
+                    },
+                    [_vm._v("Tensão")]
+                  ),
                   _vm._v(" "),
                   _c("th", [_vm._v("Ações")]),
                 ]),
@@ -30671,7 +30727,7 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(this.form.eletros, function (eletro) {
+                _vm._l(_vm.sortedEletros, function (eletro) {
                   return _c(
                     "tr",
                     {
