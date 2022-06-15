@@ -9,8 +9,8 @@
         </div>
       </div>
 
-      <input type="text" v-model="form.search">
-      <br><br>
+      <input type="text" v-model="form.search" />
+      <br /><br />
 
       <div class="table-responsive-lg" id="div_table">
         <table
@@ -191,13 +191,14 @@ export default {
           let start = (this.form.currentPage - 1) * this.form.pageSize;
           let end = this.form.currentPage * this.form.pageSize;
           if (index >= start && index < end) return true;
+        })
+        .filter((eletro) => {
+          return (
+            eletro.nome_eletro
+              .toLowerCase()
+              .indexOf(this.form.search.toLowerCase()) > -1
+          );
         });
-    },
-
-    sortedEletros() {
-      return this.form.eletros.filter((eletro) => {
-        return eletro.nome_eletro.toLowerCase().indexOf(this.form.search.toLowerCase()) > -1;
-      });
     },
 
   },
