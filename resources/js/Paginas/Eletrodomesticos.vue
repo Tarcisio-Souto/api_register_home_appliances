@@ -57,6 +57,10 @@
             </tr>
           </tfoot>
         </table>
+        <p>
+          <button @click="prevPage">Anterior</button>
+          <button @click="nextPage">Próximo</button>
+        </p>
       </div>
     </div>
   </layout>
@@ -79,6 +83,8 @@ export default {
         eletros: [],
         currentSort: "produto",
         currentSortDir: "asc",
+        pageSize: 3,
+        currentPage: 1,
       },
     };
   },
@@ -90,6 +96,14 @@ export default {
   },
 
   methods: {
+    nextPage: function () {
+      if (this.form.currentPage * this.form.pageSize < this.form.eletros.length)
+        this.form.currentPage++;
+    },
+    prevPage: function () {
+      if (this.form.currentPage > 1) this.form.currentPage--;
+    },
+
     sort: function (s) {
       //if s == current sort, reverse
       if (s === this.form.currentSort) {
@@ -154,22 +168,26 @@ export default {
   },
 
   computed: {
-
     sortedEletros: function () {
+      return this.form.eletros
+        .sort((a, b) => {
+          let modifier = 1;
+          if (this.form.currentSortDir === "asc") modifier = -1;
+          if (a[this.form.currentSort] < b[this.form.currentSort]) {
+            return -1 * modifier;
+          }
 
-      return this.form.eletros.sort((a, b) => {
-        let modifier = 1;
-        if (this.form.currentSortDir === "asc") modifier = -1;
-        if (a[this.form.currentSort] < b[this.form.currentSort]){
-          return -1 * modifier;
-        }
-          
-        if (a[this.form.currentSort] > b[this.form.currentSort]){
-          return 1 * modifier;
-        }
-          
-        return 0;
-      });
+          if (a[this.form.currentSort] > b[this.form.currentSort]) {
+            return 1 * modifier;
+          }
+
+          return 0;
+        })
+        .filter((row, index) => {
+          let start = (this.form.currentPage - 1) * this.form.pageSize;
+          let end = this.form.currentPage * this.form.pageSize;
+          if (index >= start && index < end) return true;
+        });
     },
   },
 };

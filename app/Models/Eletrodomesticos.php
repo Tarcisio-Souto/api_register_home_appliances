@@ -23,7 +23,6 @@ class Eletrodomesticos extends Model
 
     }
 
-
     public static function getEletro($id) {
 
         $eletro = DB::table('eletrodomesticos as elet')

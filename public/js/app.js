@@ -4918,6 +4918,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4931,7 +4935,9 @@ __webpack_require__.r(__webpack_exports__);
         id: null,
         eletros: [],
         currentSort: "produto",
-        currentSortDir: "asc"
+        currentSortDir: "asc",
+        pageSize: 3,
+        currentPage: 1
       }
     };
   },
@@ -4943,6 +4949,12 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    nextPage: function nextPage() {
+      if (this.form.currentPage * this.form.pageSize < this.form.eletros.length) this.form.currentPage++;
+    },
+    prevPage: function prevPage() {
+      if (this.form.currentPage > 1) this.form.currentPage--;
+    },
     sort: function sort(s) {
       //if s == current sort, reverse
       if (s === this.form.currentSort) {
@@ -5009,6 +5021,10 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         return 0;
+      }).filter(function (row, index) {
+        var start = (_this2.form.currentPage - 1) * _this2.form.pageSize;
+        var end = _this2.form.currentPage * _this2.form.pageSize;
+        if (index >= start && index < end) return true;
       });
     }
   }
@@ -30801,6 +30817,12 @@ var render = function () {
               ]),
             ]
           ),
+          _vm._v(" "),
+          _c("p", [
+            _c("button", { on: { click: _vm.prevPage } }, [_vm._v("Anterior")]),
+            _vm._v(" "),
+            _c("button", { on: { click: _vm.nextPage } }, [_vm._v("Próximo")]),
+          ]),
         ]
       ),
     ]),
