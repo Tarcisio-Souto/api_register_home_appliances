@@ -4854,6 +4854,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Layout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Layout.vue */ "./resources/js/Layout.vue");
 /* harmony import */ var _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue */ "./node_modules/@inertiajs/inertia-vue/dist/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
 //
 //
 //
@@ -4937,7 +4942,8 @@ __webpack_require__.r(__webpack_exports__);
         currentSort: "produto",
         currentSortDir: "asc",
         pageSize: 3,
-        currentPage: 1
+        currentPage: 1,
+        search: ""
       }
     };
   },
@@ -5004,7 +5010,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  computed: {
+  computed: _defineProperty({
     sortedEletros: function sortedEletros() {
       var _this2 = this;
 
@@ -5027,7 +5033,13 @@ __webpack_require__.r(__webpack_exports__);
         if (index >= start && index < end) return true;
       });
     }
-  }
+  }, "sortedEletros", function sortedEletros() {
+    var _this3 = this;
+
+    return this.form.eletros.filter(function (eletro) {
+      return eletro.nome_eletro.toLowerCase().indexOf(_this3.form.search.toLowerCase()) > -1;
+    });
+  })
 });
 
 /***/ }),
@@ -30686,6 +30698,30 @@ var render = function () {
           1
         ),
       ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.form.search,
+            expression: "form.search",
+          },
+        ],
+        attrs: { type: "text" },
+        domProps: { value: _vm.form.search },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.form, "search", $event.target.value)
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _c("br"),
       _vm._v(" "),
       _c(
         "div",

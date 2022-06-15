@@ -9,6 +9,9 @@
         </div>
       </div>
 
+      <input type="text" v-model="form.search">
+      <br><br>
+
       <div class="table-responsive-lg" id="div_table">
         <table
           id="tbl-list-eletros"
@@ -85,6 +88,7 @@ export default {
         currentSortDir: "asc",
         pageSize: 3,
         currentPage: 1,
+        search: "",
       },
     };
   },
@@ -189,6 +193,13 @@ export default {
           if (index >= start && index < end) return true;
         });
     },
+
+    sortedEletros() {
+      return this.form.eletros.filter((eletro) => {
+        return eletro.nome_eletro.toLowerCase().indexOf(this.form.search.toLowerCase()) > -1;
+      });
+    },
+
   },
 };
 </script>
