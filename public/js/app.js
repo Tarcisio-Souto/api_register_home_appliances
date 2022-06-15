@@ -31116,7 +31116,7 @@ var render = function () {
                                 type: "radio",
                                 name: "exampleRadios",
                                 id: "inputTensao2",
-                                value: "220v",
+                                value: "110v",
                                 disabled: "",
                               },
                             }),
@@ -31129,7 +31129,7 @@ var render = function () {
                               },
                               [
                                 _vm._v(
-                                  "\n                    220v\n                  "
+                                  "\n                    110v\n                  "
                                 ),
                               ]
                             ),
@@ -31177,7 +31177,7 @@ var render = function () {
                                 type: "radio",
                                 name: "exampleRadios",
                                 id: "inputTensao2",
-                                value: "110v",
+                                value: "220v",
                                 disabled: "",
                               },
                             }),
@@ -31190,7 +31190,7 @@ var render = function () {
                               },
                               [
                                 _vm._v(
-                                  "\n                    110v\n                  "
+                                  "\n                    220v\n                  "
                                 ),
                               ]
                             ),

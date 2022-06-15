@@ -90,11 +90,11 @@
                       type="radio"
                       name="exampleRadios"
                       id="inputTensao2"
-                      value="220v"
+                      value="110v"
                       disabled
                     />
                     <label class="form-check-label" for="exampleRadios2">
-                      220v
+                      110v
                     </label>
                   </div>
 
@@ -121,11 +121,11 @@
                       type="radio"
                       name="exampleRadios"
                       id="inputTensao2"
-                      value="110v"
+                      value="220v"
                       disabled
                     />
                     <label class="form-check-label" for="exampleRadios2">
-                      110v
+                      220v
                     </label>
                   </div>
                 </div>
